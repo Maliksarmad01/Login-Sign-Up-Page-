@@ -147,7 +147,3 @@ CREATE TABLE users (
 - **SQL Injection Prevention**: Uses prepared statements to avoid SQL injection attacks.
 - **Session Security**: PHP sessions are used to maintain login states, and session IDs should be rotated on login for security.
 - **HTTPS**: Implement HTTPS to protect data during transmission.
-
----
-
-This expanded version provides thorough explanations, technical details, security practices, database schema, and step-by-step setup instructions to ensure users and developers can easily understand, install, and use the project. Let me know if you need further details or clarifications!
