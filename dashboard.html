@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #1a0247, #e53a1b);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: linear-gradient(to bottom, #ffffff, #f1f1f1); 
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      animation: slideIn 1s ease-in-out;
+    }
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 24px;
+      font-weight: 600;
+      animation: fadeInTitle 1.5s ease-in-out;
+    }
+    @keyframes fadeInTitle {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .link {
+      display: block;
+      margin-top: 20px;
+      color: #4caf50;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+    .link:hover {
+      text-decoration: underline;
+      color: #2e8540;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to the Dashboard</h1>
+    <p>You have successfully logged in!</p>
+    <a href="index.html" class="link">Back to Main Page</a>
+    <a href="javascript:history.back()" class="link">Back to Previous Page</a>
+  </div>
+</body>
+</html>

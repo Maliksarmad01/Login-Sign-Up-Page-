@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login or Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #1a0247, #e53a1b);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .container {
+      width: 400px;
+      background: linear-gradient(to bottom, #ffffff, #f1f1f1); 
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      animation: slideIn 1s ease-in-out;
+    }
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 24px;
+      font-weight: 600;
+      animation: fadeInTitle 1.5s ease-in-out;
+    }
+    @keyframes fadeInTitle {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .btn {
+      display: inline-block;
+      width: calc(50% - 10px);
+      padding: 15px;
+      margin: 15px;
+      background: linear-gradient(to right, #007bff, #0056b3);
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.3s, transform 0.3s;
+      animation: fadeInButton 1.5s ease-in-out;
+    }
+    @keyframes fadeInButton {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .btn:hover {
+      background: linear-gradient(to bottom, #0056b3, #003f7f);
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome</h1>
+    <a href="login.html" class="btn">Login</a>
+    <a href="register.html" class="btn">Sign Up</a>
+  </div>
+</body>
+</html>

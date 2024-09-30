@@ -1,0 +1,483 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(to bottom, #1a0247, #e53a1b);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      font-size: larger;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .container {
+      width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 40px;
+      border: #000000;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      background:linear-gradient(to right, #ffffff, #ffffff);
+      color: rgb(2, 2, 2);
+      padding: 15px;
+      border-radius: 8px;
+    }
+    /* Add animations for progress bar, form group, submit and reset buttons, and error messages */
+    .progress-bar div {
+      height: 20px;
+      background: #28a745;
+      width: 0%;
+      border-radius: 5px;
+      transition: width 0.3s;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      animation: slideIn 1s ease-in-out;
+    }
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Add styles for form elements */
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #000000;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      box-sizing: border-box;
+      border: 1px solid #000000;
+      border-radius: 5px;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: #000000;
+    }
+    .form-group .error {
+      color: #dc3545;
+      font-size: 14px;
+      display: none;
+    }
+    .toggle-password {
+      cursor: pointer;
+      position: absolute;
+      right: 20px;
+      top: 35px;
+      color: 007bff;
+    }
+    .strength-meter {
+      height: 5px;
+      width: 100%;
+      background: #229333;
+      margin-top: 5px;
+      border-radius: 5px;
+      overflow: hidden;
+      animation: slideIn 1s ease-in-out;
+    }
+    .strength-meter div {
+      height: 100%;
+      transition: width 0.3s;
+    }
+    .btn {
+      width: 50%;
+      height: 60px;
+      padding: 15px;
+      background: linear-gradient(to right, #007bff, #0056b3);
+      border: none;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      margin-left: 225px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      animation: fadeInButton 1.5s ease-in-out;
+    }
+    @keyframes fadeInButton {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .btn:hover {
+      background: linear-gradient(to bottom, #0056b3, #003f7f);
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+   
+    p a {
+  color: #007bff;  /* Change the color to #007bff */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+p a:hover {
+  text-decoration: underline;
+  color: #0056b3;  /* Slightly darker shade for hover effect */
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Registration Form</h1>
+    <div class="progress-bar">
+      <div></div>
+    </div>
+    <form id="register" action="register.php" method="POST" >
+    <!-- form elements -->
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" required title="Enter your first name">
+      </div>
+      <div class="form-group">
+        <label for="middleName">Middle Name</label>
+        <input type="text" id="middleName" name="middleName" title="Enter your middle name">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required title="Enter your last name">
+      </div>
+      <div class="form-group">
+        <label for="username">Username "Should be unique"</label>
+        <input type="text" id="username" name="username" required title="Enter your desired username">
+        <div class="tooltip">Choose a unique username for your account</div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required title="Enter a valid email address">
+        <div class="error" id="emailError">Invalid email format</div>
+      </div>
+      <div class="form-group" style="position: relative;">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required title="Password should be at least 6 characters long">
+        <span class="toggle-password" onclick="togglePasswordVisibility('password')">Show</span>
+        <div class="strength-meter" id="strengthMeter">
+          <div></div>
+        </div>
+        <div class="error" id="passwordError">Password must be at least 6 characters</div>
+        <div class="strength-text" id="passwordStrengthText">Strength</div> 
+        <div class="error" id="passwordError">Password must be at least 6 characters</div>
+      </div>
+      <div class="form-group" style="position: relative;">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required title="Re-enter your password">
+        <span class="toggle-password" onclick="togglePasswordVisibility('confirmPassword')">Show</span>
+        <div class="error" id="confirmPasswordError">Passwords do not match</div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" required title="Enter your phone number">
+        <div class="error" id="phoneError">Invalid phone number</div>
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" required title="Enter your date of birth">
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" required>
+          <option value="">Select your gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="country">Country</label>
+          <select id="country" name="country" onchange="loadStates()" required>
+            <option value="">Select your country</option>
+            <option value="USA">USA</option>
+            <option value="India">India</option>
+            <option value="Canada">Canada</option>
+            <option value="Australia">Australia</option>
+            <option value="Brazil">Brazil</option>
+            <option value="China">China</option>
+            <option value="Germany">Germany</option>
+            <option value="Japan">Japan</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Russia">Russia</option>
+            <option value="South_Africa">South Africa</option>
+            <option value="South_Korea">South Korea</option>
+            <option value="Spain">Spain</option>
+            <option value="Turkey">Turkey</option>
+            <option value="United_Kingdom">United Kingdom</option>
+          </select>
+      </div>
+      <div class="form-group">
+        <label for="state">State</label>
+        <select id="state" name="state" required>
+          <option value="">Select your state</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea id="address" name="address" rows="4" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="occupation">Occupation</label>
+        <input type="text" id="occupation" name="occupation" title="Enter your occupation">
+      </div>
+      <div class="form-group">
+        <label for="bio">Short Bio</label>
+        <textarea id="bio" name="bio" rows="4" title="Write a short bio about yourself"></textarea>
+      </div>
+      <button type="submit" class="btn">Register</button><br>
+      <button type="reset" class="btn">Reset</button>
+    </form>
+    <p style="text-align: center;">Already have an account? <a href="login.html">Log in</a></p>
+    <p  style="text-align: center;"><a href="Welcome.html" class="link">Back to Main Page</a></p>
+    <div class="preview" id="preview">
+      <h2 style="text-align: center;">Registration Preview</h2>
+      <p><strong>First Name:</strong> <span id="previewFirstName"></span></p>
+      <p><strong>Middle Name:</strong> <span id="previewMiddleName"></span></p>
+      <p><strong>Last Name:</strong> <span id="previewLastName"></span></p>
+      <p><strong>Username:</strong> <span id="previewUsername"></span></p>
+      <p><strong>Email:</strong> <span id="previewEmail"></span></p>
+      <p><strong>Phone Number:</strong> <span id="previewPhone"></span></p>
+      <p><strong>Date of Birth:</strong> <span id="previewDob"></span></p>
+      <p><strong>Gender:</strong> <span id="previewGender"></span></p>
+      <p><strong>Country:</strong> <span id="previewCountry"></span></p>
+      <p><strong>State:</strong> <span id="previewState"></span></p>
+      <p><strong>Address:</strong> <span id="previewAddress"></span></p>
+      <p><strong>Occupation:</strong> <span id="previewOccupation"></span></p>
+      <p><strong>Short Bio:</strong> <span id="previewBio"></span></p>
+    </div>
+  </div>
+
+  <script>
+    function togglePasswordVisibility(id) {
+      var field = document.getElementById(id);
+      if (field.type === "password") {
+        field.type = "text";
+      } else {
+        field.type = "password";
+      }
+    }
+
+    function updateProgressBar() {
+      var progressBar = document.querySelector('.progress-bar div');
+      var form = document.getElementById('registrationForm');
+      var totalFields = form.elements.length - 2; // excluding submit and reset buttons
+      var filledFields = 0;
+
+      for (var i = 0; i < totalFields; i++) {
+        if (form.elements[i].value) {
+          filledFields++;
+        }
+      }
+
+      var percentage = (filledFields / totalFields) * 100;
+      progressBar.style.width = percentage + '%';
+    }
+
+    function updatePreview() {
+      document.getElementById('previewFirstName').innerText = document.getElementById('firstName').value;
+      document.getElementById('previewMiddleName').innerText = document.getElementById('middleName').value;
+      document.getElementById('previewLastName').innerText = document.getElementById('lastName').value;
+      document.getElementById('previewUsername').innerText = document.getElementById('username').value;
+      document.getElementById('previewEmail').innerText = document.getElementById('email').value;
+      document.getElementById('previewPhone').innerText = document.getElementById('phone').value;
+      document.getElementById('previewDob').innerText = document.getElementById('dob').value;
+      document.getElementById('previewGender').innerText = document.getElementById('gender').value;
+      document.getElementById('previewCountry').innerText = document.getElementById('country').value;
+      document.getElementById('previewState').innerText = document.getElementById('state').value;
+      document.getElementById('previewAddress').innerText = document.getElementById('address').value
+      ;
+      document.getElementById('previewOccupation').innerText = document.getElementById('occupation').value;
+      document.getElementById('previewBio').innerText = document.getElementById('bio').value;
+    }
+
+    function loadStates() {
+      var country = document.getElementById('country').value;
+      var stateSelect = document.getElementById('state');
+      stateSelect.innerHTML = '<option value="">Select your state</option>';
+
+      var states = {
+        USA: ['California', 'Texas', 'New York'],
+        India: ['Maharashtra', 'Karnataka', 'Tamil Nadu'],
+        Canada: ['Ontario', 'Quebec', 'British Columbia', 'Alberta'],
+        Australia: ['New South Wales', 'Victoria', 'Queensland', 'Western Australia'],
+        Brazil: ['Sao Paulo', 'Rio de Janeiro', 'Minas Gerais', 'Bahia'],
+        China: ['Guangdong', 'Shandong', 'Henan', 'Sichuan'],
+        Germany: ['Bavaria', 'North Rhine-Westphalia', 'Baden-Wurttemberg', 'Lower Saxony'],
+        Japan: ['Tokyo', 'Osaka', 'Kanagawa', 'Aichi'],
+        Mexico: ['Mexico City', 'Jalisco', 'Mexico State', 'Nuevo Leon'],
+        Russia: ['Moscow', 'Saint Petersburg', 'Novosibirsk', 'Sverdlovsk'],
+        South_Africa: ['Gauteng', 'KwaZulu-Natal', 'Western Cape', 'Eastern Cape'],
+        South_Korea: ['Seoul', 'Gyeonggi', 'Busan', 'Incheon'],
+        Spain: ['Madrid', 'Catalonia', 'Andalusia', 'Valencia'],
+        Turkey: ['Istanbul', 'Ankara', 'Izmir', 'Bursa'],
+        United_Kingdom: ['England', 'Scotland', 'Wales', 'Northern Ireland']
+      };
+
+      if (country && states[country]) {
+        states[country].forEach(function(state) {
+          var option = document.createElement('option');
+          option.value = state;
+          option.text = state;
+          stateSelect.add(option);
+        });
+      }
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault();
+
+      var form = document.getElementById('registrationForm');
+
+      if (!validateEmail()) return;
+      if (!validatePassword()) return;
+      if (!validatePhone()) return;
+      if (!validateConfirmPassword()) return;
+
+      alert('Registration successful!');
+      form.reset();
+      updateProgressBar();
+      updatePreview();
+    }
+
+    function validateEmail() {
+      var email = document.getElementById('email').value;
+      var emailError = document.getElementById('emailError');
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        emailError.style.display = 'block';
+        return false;
+      } else {
+        emailError.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validatePassword() {
+      var password = document.getElementById('password').value;
+      var passwordError = document.getElementById('passwordError');
+      if (password.length < 6) {
+        passwordError.style.display = 'block';
+        return false;
+      } else {
+        passwordError.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validateConfirmPassword() {
+      var password = document.getElementById('password').value;
+      var confirmPassword = document.getElementById('confirmPassword').value;
+      var confirmPasswordError = document.getElementById('confirmPasswordError');
+      if (password !== confirmPassword) {
+        confirmPasswordError.style.display = 'block';
+        return false;
+      } else {
+        confirmPasswordError.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validatePhone() {
+      var phone = document.getElementById('phone').value;
+      var phoneError = document.getElementById('phoneError');
+      var phonePattern = /^\d{11}$/;
+      if (!phonePattern.test(phone)) {
+        phoneError.style.display = 'block';
+        return false;
+      } else {
+        phoneError.style.display = 'none';
+        return true;
+      }
+    }
+
+    function updatePasswordStrength() {
+      var password = document.getElementById('password').value;
+      var strengthMeter = document.getElementById('strengthMeter');
+      var strengthText = document.getElementById('passwordStrengthText');
+      var lowerCaseLetters = /[a-z]/g;
+      var upperCaseLetters = /[A-Z]/g;
+      var numbers = /[0-9]/g;
+      var specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
+      var strength = 0;
+
+      if (password.match(lowerCaseLetters)) {
+        strength++;
+      }
+      if (password.match(upperCaseLetters)) {
+        strength++;
+      }
+      if (password.match(numbers)) {
+        strength++;
+      }
+      if (password.match(specialChars)) {
+        strength++;
+      }
+
+      var percentage = (strength / 4) * 100;
+      strengthMeter.style.width = percentage + '%';
+
+      switch (strength) {
+        case 0:
+        case 1:
+          strengthMeter.className = 'strength-meter strength-weak';
+          strengthText.textContent = 'Weak';
+          break;
+        case 2:
+          strengthMeter.className = 'strength-meter strength-medium';
+          strengthText.textContent = 'Medium';
+          break;
+        case 3:
+          strengthMeter.className = 'strength-meter strength-strong';
+          strengthText.textContent = 'Strong';
+          break;
+        case 4:
+          strengthMeter.className = 'strength-meter strength-very-strong';
+          strengthText.textContent = 'Very Strong';
+          break;
+      }
+    }
+
+    document.getElementById('password').addEventListener('input', updatePasswordStrength);
+    document.addEventListener('DOMContentLoaded', function() {
+    var formFields = document.querySelectorAll('#register input, #register select, #register textarea');
+    formFields.forEach(function(field) {
+        field.addEventListener('input', updatePreview);
+    });
+});
+    document.getElementById('registrationForm').addEventListener('input', updatePreview);
+  </script>
+</body>
+</html>
