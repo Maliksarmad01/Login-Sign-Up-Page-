@@ -134,7 +134,7 @@ CREATE TABLE users (
    - Update `login.php` and `register.php` with your database connection details (host, username, password, database name).
 
 4. **Deploy the Project**:
-   - Upload the files to a server that supports PHP (e.g., Apache, Nginx with PHP-FPM).
+   - Upload the files to a server that supports PHP (e.g., Apache,Xampp).
    - Ensure the server is configured to use **PHP 7.0+** (for `password_hash()` and `password_verify()` functions).
 
 5. **Run the Application**:
